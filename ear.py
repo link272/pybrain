@@ -2,6 +2,7 @@
 
 import pyaudio
 import wave
+from brain import Neuron
 
 class Ear(object):
 
@@ -25,7 +26,7 @@ class Ear(object):
         stream.stop_stream()
         stream.close()
         audio.terminate()
-        return frame
+        return Neuron(frame)
 
 
 
