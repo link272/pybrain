@@ -9,20 +9,19 @@ class Ear(object):
     channels = 2
     rate = 44100
     chunk = 1024
-    record_seconds = 0.01
- 
+
     def __init__(self):
         audio = pyaudio.PyAudio()
 
-    def stream(self):
+    def stream(self, record_time):
         stream = audio.open(format=self.format, 
                             channels=self.channels,
                             rate=self.rate, 
                             input=True,
                             frames_per_buffer=self.chunk)
         frames = []
-        for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-            frames.append(stream.read(CHUNK))
+        for i in range(0, int(self.rate/ self.chunk* record_time)):
+            frames.append(stream.read(self.chunk))
         stream.stop_stream()
         stream.close()
         audio.terminate()
